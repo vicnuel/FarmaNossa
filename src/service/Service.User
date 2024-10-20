@@ -1,0 +1,34 @@
+unit Service;
+
+interface
+
+uses Util.ApiAccess, System.SysUtils, System.Classes, System.JSON, FarmaNossa.Global.DataApi;
+
+type
+  TServiceUser = Class
+  FApi: TApiHelper;
+  Url: String;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function GetUser(): TJSONArray;
+End;
+
+const
+_URL_API_USER = '/user';
+
+implementation
+
+constructor TServiceUser.Create;
+begin
+  FApi := TApiHelper.Create;
+  Url := GetApiUrl() + _URL_API_USER
+end;
+
+destructor TServiceUser.Destroy;
+begin
+  FApi.Destroy;
+  inherited;
+end;
+
+end.

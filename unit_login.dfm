@@ -1,32 +1,37 @@
 object form_login: Tform_login
   Left = 0
   Top = 0
-  Align = alClient
   BorderStyle = bsNone
-  ClientHeight = 442
-  ClientWidth = 640
+  Caption = 'FarmaNossa - Login'
+  ClientHeight = 416
+  ClientWidth = 601
   Color = clBackground
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
   OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
   TextHeight = 15
   object pnl_background: TPanel
-    Left = 32
-    Top = 8
-    Width = 577
+    Left = 0
+    Top = 0
+    Width = 601
     Height = 417
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
-      577
+      601
       417)
     object btn_close: TSpeedButton
-      Left = 544
+      Left = 568
       Top = 16
       Width = 23
       Height = 21
@@ -46,10 +51,10 @@ object form_login: Tform_login
     object Label8: TLabel
       Left = 288
       Top = 48
-      Width = 218
+      Width = 216
       Height = 21
       Alignment = taCenter
-      Caption = 'Fa'#231'a login com Usu'#225'rio e senha'
+      Caption = 'Fa'#231'a login com usu'#225'rio e senha'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -67,7 +72,6 @@ object form_login: Tform_login
       Color = clMenu
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 393
       object Image1: TImage
         Left = 0
         Top = 0
@@ -7225,6 +7229,7 @@ object form_login: Tform_login
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        Transparent = True
       end
       object Label4: TLabel
         Left = 72
@@ -7239,6 +7244,7 @@ object form_login: Tform_login
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        Transparent = True
       end
       object Label5: TLabel
         Left = 82
@@ -7247,12 +7253,15 @@ object form_login: Tform_login
         Height = 15
         Alignment = taCenter
         Caption = 'vers'#227'o 1.0.0'
+        Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clAzure
+        Font.Color = clMenuBar
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
+        ParentColor = False
         ParentFont = False
+        Transparent = True
       end
     end
     object pnl_user: TPanel
@@ -7277,8 +7286,6 @@ object form_login: Tform_login
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 1
-        ExplicitTop = 1
         ExplicitWidth = 51
       end
       object edit_user: TEdit
@@ -7297,9 +7304,7 @@ object form_login: Tform_login
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 1
-        ExplicitTop = 24
-        ExplicitWidth = 279
+        OnKeyPress = FormKeyPress
       end
       object Panel2: TPanel
         Left = 0
@@ -7313,9 +7318,6 @@ object form_login: Tform_login
         Constraints.MaxHeight = 2
         ParentBackground = False
         TabOrder = 1
-        ExplicitLeft = 1
-        ExplicitTop = 15
-        ExplicitWidth = 256
       end
     end
     object pnl_pass: TPanel
@@ -7340,18 +7342,15 @@ object form_login: Tform_login
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 1
-        ExplicitTop = 1
         ExplicitWidth = 41
       end
-      object Edit2: TEdit
+      object edit_pass: TEdit
         Left = 0
         Top = 29
         Width = 289
         Height = 25
         Align = alBottom
         BorderStyle = bsNone
-        CharCase = ecUpperCase
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGray
@@ -7361,6 +7360,7 @@ object form_login: Tform_login
         ParentFont = False
         PasswordChar = '*'
         TabOrder = 0
+        OnKeyPress = FormKeyPress
       end
       object Panel3: TPanel
         Left = 0
@@ -7374,9 +7374,6 @@ object form_login: Tform_login
         Constraints.MaxHeight = 2
         ParentBackground = False
         TabOrder = 1
-        ExplicitLeft = 1
-        ExplicitTop = 55
-        ExplicitWidth = 279
       end
     end
     object Panel1: TPanel
@@ -7413,5 +7410,37 @@ object form_login: Tform_login
         ExplicitWidth = 177
       end
     end
+  end
+  object IdHTTP1: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 512
+    Top = 288
+  end
+  object IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL
+    MaxLineAction = maException
+    Port = 0
+    DefaultPort = 0
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 520
+    Top = 344
+  end
+  object IdEncoderMIME1: TIdEncoderMIME
+    FillChar = '='
+    Left = 552
+    Top = 232
   end
 end
