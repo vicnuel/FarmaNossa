@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons,
-  Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.Menus;
 
 type
   TFormSeach = class(TForm)
@@ -25,6 +25,11 @@ type
     pnlTotal: TPanel;
     lbTotal: TLabel;
     DataSource1: TDataSource;
+    btnUpdate: TBitBtn;
+    PopupMenu1: TPopupMenu;
+    popUpdate: TMenuItem;
+    N1: TMenuItem;
+    Delete: TMenuItem;
     procedure btnCloseClick(Sender: TObject);
     procedure btnSelectClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -38,6 +43,9 @@ type
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure cbTypeChange(Sender: TObject);
+    procedure btnUpdateClick(Sender: TObject);
+    procedure popUpdateClick(Sender: TObject);
+    procedure DeleteClick(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -76,9 +84,15 @@ end;
 procedure TFormSeach.btnSelectClick(Sender: TObject);
 begin
   if (DataSource1.DataSet.IsEmpty) then
-    raise Exception.Create('Selecione um regitro');
+    raise Exception.Create('Selecione um registro');
   Self.Close;
   Self.ModalResult := mrOk;
+end;
+
+procedure TFormSeach.btnUpdateClick(Sender: TObject);
+begin
+if (DataSource1.DataSet.IsEmpty) then
+    raise Exception.Create('Selecione um registro');
 end;
 
 procedure TFormSeach.cbTypeChange(Sender: TObject);
@@ -88,8 +102,6 @@ begin
     editValue.NumbersOnly := True
   else
     editValue.NumbersOnly := False;
-
-
 end;
 
 procedure TFormSeach.DBGrid1DblClick(Sender: TObject);
@@ -110,6 +122,22 @@ procedure TFormSeach.DBGrid1KeyPress(Sender: TObject; var Key: Char);
 begin
   if (Key = #13) and (not DataSource1.DataSet.IsEmpty) then
     btnSelect.Click;
+end;
+
+procedure TFormSeach.DeleteClick(Sender: TObject);
+begin
+  if (DataSource1.DataSet.IsEmpty) then
+    raise Exception.Create('Selecione um registro');
+
+  if (Application.MessageBox(
+      'Conficar a exclusão deste registro?',
+      'Confirmar exclusão',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) <> IDYES
+  ) then
+      Exit;
+
+  DataSource1.DataSet.Delete;
+  Self.SearchData;
 end;
 
 procedure TFormSeach.editValueKeyDown(Sender: TObject; var Key: Word;
@@ -147,6 +175,11 @@ procedure TFormSeach.FormShow(Sender: TObject);
 begin
   Self.ModalResult := mrCancel;
   editValue.SetFocus;
+end;
+
+procedure TFormSeach.popUpdateClick(Sender: TObject);
+begin
+  btnSearch.Click;
 end;
 
 end.
