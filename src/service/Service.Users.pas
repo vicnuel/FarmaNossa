@@ -12,7 +12,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function GetUsers(): TJSONArray;
+    function GetUsers(Name: String = ''; Id: Integer = 0): TJSONArray;
 End;
 
 const
@@ -32,26 +32,44 @@ begin
   inherited;
 end;
 
-function TServiceUser.GetUsers(): TJSONArray;
+function TServiceUser.GetUsers(Name: String = ''; Id: Integer = 0): TJSONArray;
 var
 IdHttp: TIdHTTP;
 Response: string;
 JsonValue: TJSONValue;
+queryParams: string;
+QueryClauses: TStringList;
 //JsonArray: TJSONArray;
 begin
   Result := Nil;
+  QueryClauses := TStringList.Create;
+  queryParams := '';
   try
-    IdHttp := FApi.GetAPI;
-    Response := IdHttp.Get(Url);
-    JsonValue := TJSONObject.ParseJSONValue(Response);
-    if Assigned(JSONValue) and (JSONValue is TJSONArray) then
-    begin
-      Result := JsonValue as TJSONArray;
-    end;
-  except on E: EIdHTTPProtocolException do
+    if Name <> '' then
+      QueryClauses.Add('name='+ Name);
+    if Id > 0 then
+      QueryClauses.Add('id=' + Id.ToString);
+    if QueryClauses.Count > 0 then
+      queryParams := '?' + String.Join('&', QueryClauses.ToStringArray);
+    
+    try
+      IdHttp := FApi.GetAPI;
+      Response := IdHttp.Get(Url + queryParams);
+      JsonValue := TJSONObject.ParseJSONValue(Response);
+      if Assigned(JSONValue) and (JSONValue is TJSONArray) then
       begin
-        ShowMessage('Erro no login: ' + E.Message);
+        Result := JsonValue as TJSONArray;
       end;
+    except on E: EIdHTTPProtocolException do
+        begin
+          if IdHttp.ResponseCode = 404 then
+            ShowMessage('Nenhum usuário encontrado')
+          else 
+            ShowMessage('Erro no login: ' + E.Message);
+        end;
+    end;
+  finally
+    QueryClauses.Free;
   end;
 
 end;

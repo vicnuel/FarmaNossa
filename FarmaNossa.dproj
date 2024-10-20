@@ -143,6 +143,9 @@
             <Form>FormSeachUsers</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\util\Util.ApiAccess.pas"/>
+        <DCCReference Include="Global\FarmaNossa.Global.DataApi.pas"/>
+        <DCCReference Include="src\service\Service.Users.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

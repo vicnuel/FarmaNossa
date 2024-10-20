@@ -87,8 +87,10 @@ begin
     except
       on E: EIdHTTPProtocolException do
       begin
-        ShowMessage('Erro no login: ' + E.Message);
+//        ShowMessage('Erro no login: ' + E.Message);
       end;
+      on E: Exception do
+        Result := False;
     end;
   finally
     IdHTTP.Free;
@@ -120,7 +122,7 @@ begin
     exit;
   end;
 
-  logged := login(Name, Pass);
+  logged := Self.login(Name, Pass);
 
   if logged then
     ModalResult := mrOk // logado

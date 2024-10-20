@@ -37,6 +37,7 @@ type
     procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure cbTypeChange(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -78,6 +79,17 @@ begin
     raise Exception.Create('Selecione um regitro');
   Self.Close;
   Self.ModalResult := mrOk;
+end;
+
+procedure TFormSeach.cbTypeChange(Sender: TObject);
+begin
+  editValue.Text := '';
+  if cbType.Text = 'Código' then
+    editValue.NumbersOnly := True
+  else
+    editValue.NumbersOnly := False;
+
+
 end;
 
 procedure TFormSeach.DBGrid1DblClick(Sender: TObject);

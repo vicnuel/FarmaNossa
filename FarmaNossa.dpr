@@ -8,7 +8,10 @@ uses
   Vcl.Styles,
   FarmaNossa.Global.Auth in 'Global\FarmaNossa.Global.Auth.pas',
   View.Model.Search in 'src\view\model\View.Model.Search.pas' {FormSeach},
-  View.Users0100 in 'src\view\Users\View.Users0100.pas' {FormSeachUsers};
+  View.Users0100 in 'src\view\Users\View.Users0100.pas' {FormSeachUsers},
+  Util.ApiAccess in 'src\util\Util.ApiAccess.pas',
+  FarmaNossa.Global.DataApi in 'Global\FarmaNossa.Global.DataApi.pas',
+  Service.Users in 'src\service\Service.Users.pas';
 
 {$R *.res}
 

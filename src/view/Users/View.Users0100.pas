@@ -16,6 +16,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     procedure LoadData;
+  protected
     procedure SearchData; override;
   public
     { Public declarations }
@@ -54,16 +55,24 @@ var
   JSONArr: TJSONArray;
   JSONObj: TJSONObject;
   User: TServiceUser;
+  Value: String;
 //  Users : TJSONArray;
   I: Integer;
 begin
   User := TServiceUser.Create;
-  JSONArr := TJSONArray.Create;
+  JSONArr := nil;
   try
-    JSONArr := User.GetUsers;
+    Value := editValue.Text;
+    if (cbType.Text = 'Código') and (Value <> '') then
+      JSONArr := User.GetUsers('',Value.ToInteger())
+    else
+      JSONArr := User.GetUsers(Value);
 
     // Limpar dados existentes
     memTable.EmptyDataSet;
+
+    if not Assigned( JSONArr) then
+      exit;
 
     // Preencher o TFDMemTable com os dados do JSON
     memTable.Open;

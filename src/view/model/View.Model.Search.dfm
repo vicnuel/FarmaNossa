@@ -25,7 +25,6 @@ object FormSeach: TFormSeach
     Height = 65
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 759
     object Panel1: TPanel
       Left = 1
       Top = 1
@@ -34,7 +33,6 @@ object FormSeach: TFormSeach
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitTop = -3
       object Label1: TLabel
         Left = 15
         Top = 25
@@ -54,11 +52,13 @@ object FormSeach: TFormSeach
         Top = 22
         Width = 73
         Height = 21
+        Style = csDropDownList
         ItemIndex = 0
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
         Text = 'Nome'
+        OnChange = cbTypeChange
         Items.Strings = (
           'Nome'
           'C'#243'digo')
@@ -68,6 +68,7 @@ object FormSeach: TFormSeach
         Top = 22
         Width = 193
         Height = 21
+        CharCase = ecUpperCase
         TabOrder = 1
         OnKeyDown = editValueKeyDown
         OnKeyPress = editValueKeyPress
@@ -92,8 +93,6 @@ object FormSeach: TFormSeach
     BevelOuter = bvNone
     Padding.Right = 10
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 354
     object btnClose: TBitBtn
       AlignWithMargins = True
       Left = 670
@@ -161,8 +160,6 @@ object FormSeach: TFormSeach
         0000000000000000000000000000000000000000000000000000}
       TabOrder = 0
       OnClick = btnCloseClick
-      ExplicitLeft = 680
-      ExplicitTop = 6
     end
     object btnCreate: TBitBtn
       AlignWithMargins = True
@@ -234,9 +231,6 @@ object FormSeach: TFormSeach
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 1
-      ExplicitLeft = 477
-      ExplicitTop = 10
-      ExplicitHeight = 40
     end
     object btnSelect: TBitBtn
       AlignWithMargins = True
@@ -309,8 +303,6 @@ object FormSeach: TFormSeach
         78D5FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 2
       OnClick = btnSelectClick
-      ExplicitLeft = 579
-      ExplicitTop = 10
     end
   end
   object pnGrid: TPanel
@@ -321,7 +313,6 @@ object FormSeach: TFormSeach
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
-    ExplicitTop = 63
     object DBGrid1: TDBGrid
       Left = 0
       Top = 0
@@ -351,7 +342,7 @@ object FormSeach: TFormSeach
         Left = 691
         Top = 1
         Width = 82
-        Height = 13
+        Height = 23
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 7
@@ -360,6 +351,7 @@ object FormSeach: TFormSeach
         Alignment = taCenter
         Caption = 'Registros: 00000'
         Layout = tlCenter
+        ExplicitHeight = 13
       end
     end
   end
