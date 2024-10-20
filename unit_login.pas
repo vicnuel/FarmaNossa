@@ -67,6 +67,7 @@ begin
   Result := False;
   IdHTTP := TIdHTTP.Create(nil);
   IdSSLIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  JSONObj := nil;
   try
     IdHTTP.IOHandler := IdSSLIOHandler;
     IdHTTP.Request.ContentType := 'application/json';
