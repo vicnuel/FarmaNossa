@@ -8,7 +8,7 @@ uses
   Vcl.DBGrids, Vcl.Buttons, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, System.JSON,
-  FireDAC.Comp.Client, Service.Users;
+  FireDAC.Comp.Client, Service.Users, Vcl.Menus;
 
 type
   TFormSeachUsers = class(TFormSeach)
