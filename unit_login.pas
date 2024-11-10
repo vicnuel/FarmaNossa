@@ -6,10 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons,
   Vcl.Imaging.pngimage, IPPeerClient, REST.Client, Data.Bind.Components,
-  Data.Bind.ObjectScope, REST.Types, System.NetEncoding, IdBaseComponent,
-  IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler,
+  Data.Bind.ObjectScope, REST.Types, System.NetEncoding, IdBaseComponent, Service.VariableInRegistry,
+  IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler, View.Config,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdCoder,
-  IdCoder3to4, IdCoderMIME, FarmaNossa.Global.Auth, System.JSON;
+  IdCoder3to4, IdCoderMIME, FarmaNossa.Global.Auth, System.JSON, FarmaNossa.Global.DataApi;
 
 type
   Tform_login = class(TForm)
@@ -34,19 +34,18 @@ type
     IdHTTP1: TIdHTTP;
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     IdEncoderMIME1: TIdEncoderMIME;
+    btnConfig: TImage;
     procedure btn_closeClick(Sender: TObject);
     procedure btn_loginClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btnConfigClick(Sender: TObject);
   private
     function login(Name:String; Password: String): Boolean;
   public
     { Public declarations }
   end;
-
-const
-_URL_API_LOGIN = 'http://localhost:1000/login';
 
 var
   form_login: Tform_login;
@@ -75,7 +74,7 @@ begin
     IdHTTP.Request.CustomHeaders.Values['Authorization'] := AuthValue;
 
     try
-      Response := IdHTTP.Get(_URL_API_LOGIN);
+      Response := IdHTTP.Get(GetApiUrl() + '/login');
       JSONValue := TJSONObject.ParseJSONValue(Response);
       if Assigned(JSONValue) and (JSONValue is TJSONObject) then
       begin
@@ -105,7 +104,15 @@ var
 logged: Boolean;
 Name: String;
 Pass: String;
+Server: String;
 begin
+  Server := Trim(GetEnvVariableFromRegistry('FARMA_NOSSA_API_URL'));
+
+  if (Server = '') then
+  begin
+    raise Exception.Create('Configure o servidor!');
+  end;
+
   name := trim(edit_user.Text);
   pass := trim(edit_pass.Text);
 
@@ -159,6 +166,19 @@ begin
     else
       Perform(WM_NEXTDLGCTL, 0, 0);
   end;
+end;
+
+procedure Tform_login.btnConfigClick(Sender: TObject);
+var
+SViewConfig : TViewFormConfig;
+begin
+  SViewConfig := TViewFormConfig.Create(nil);
+  try
+    SViewConfig.ShowModal;
+  finally
+    SViewConfig.Free;
+  end;
+
 end;
 
 procedure Tform_login.btn_closeClick(Sender: TObject);

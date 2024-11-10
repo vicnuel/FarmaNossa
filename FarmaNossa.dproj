@@ -205,6 +205,12 @@
             <Form>ViewReport</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\service\Service.VariableInRegistry.pas"/>
+        <DCCReference Include="src\view\Config\View.Config.pas">
+            <ContainerId>ConfigurationCompiler</ContainerId>
+            <Form>ViewFormConfig</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

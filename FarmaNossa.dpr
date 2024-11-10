@@ -31,7 +31,9 @@ uses
   Service.Stock in 'src\service\Service.Stock.pas',
   View.Stock.r1200 in 'src\view\Stock\View.Stock.r1200.pas' {ViewStock},
   Service.Report in 'src\service\Service.Report.pas',
-  View.Report in 'src\view\Report\View.Report.pas' {ViewReport};
+  View.Report in 'src\view\Report\View.Report.pas' {ViewReport},
+  Service.VariableInRegistry in 'src\service\Service.VariableInRegistry.pas',
+  View.Config in 'src\view\Config\View.Config.pas' {ViewFormConfig};
 
 {$R *.res}
 
