@@ -146,6 +146,65 @@
         <DCCReference Include="src\util\Util.ApiAccess.pas"/>
         <DCCReference Include="Global\FarmaNossa.Global.DataApi.pas"/>
         <DCCReference Include="src\service\Service.Users.pas"/>
+        <DCCReference Include="src\view\model\View.Model.Create.pas">
+            <Form>ViewModelCreate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Users\View.Users.Create.pas">
+            <Form>ViewUserCreate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Products\View.Products.r0200.pas">
+            <Form>FormSeachProduct</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Product.pas"/>
+        <DCCReference Include="src\view\Products\View.Products.Create.pas">
+            <Form>ViewCreateProduct</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Local.pas"/>
+        <DCCReference Include="src\view\Local\View.Local.r0300.pas">
+            <Form>FormSeachLocal</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Local\View.Local.Create.pas">
+            <Form>ViewLocalCreate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Input.pas"/>
+        <DCCReference Include="src\view\model\View.Model.SearchEntry.pas">
+            <Form>ViewModelSearchEntry</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Input\View.Input.r1000.pas">
+            <Form>ViewInputSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Input\View.Input.Create.pas">
+            <Form>ViewInputCreate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Lot.pas"/>
+        <DCCReference Include="src\service\Service.Output.pas"/>
+        <DCCReference Include="src\view\Output\View.Output.r1100.pas">
+            <Form>ViewSearchOutput</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\Output\View.Output.Create.pas">
+            <Form>ViewOutputCreate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Stock.pas"/>
+        <DCCReference Include="src\view\Stock\View.Stock.r1200.pas">
+            <Form>ViewStock</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\service\Service.Report.pas"/>
+        <DCCReference Include="src\view\Report\View.Report.pas">
+            <Form>ViewReport</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

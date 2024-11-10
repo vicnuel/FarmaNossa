@@ -29,7 +29,9 @@ type
     PopupMenu1: TPopupMenu;
     popUpdate: TMenuItem;
     N1: TMenuItem;
-    Delete: TMenuItem;
+    CreateUser: TMenuItem;
+    N2: TMenuItem;
+    Excluir1: TMenuItem;
     procedure btnCloseClick(Sender: TObject);
     procedure btnSelectClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -45,13 +47,16 @@ type
     procedure cbTypeChange(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
     procedure popUpdateClick(Sender: TObject);
-    procedure DeleteClick(Sender: TObject);
+//    procedure DeleteClick(Sender: TObject);
+    procedure CreateUserClick(Sender: TObject);
+    procedure Excluir1Click(Sender: TObject);
   private
     { Private declarations }
   protected
     procedure SearchData; Virtual;
+//    procedure ShowFormCreate(const AId: Integer = 0); virtual; abstract;
   public
-    { Public declarations }
+    ResultSelect: Integer;
   end;
 
 var
@@ -85,8 +90,6 @@ procedure TFormSeach.btnSelectClick(Sender: TObject);
 begin
   if (DataSource1.DataSet.IsEmpty) then
     raise Exception.Create('Selecione um registro');
-  Self.Close;
-  Self.ModalResult := mrOk;
 end;
 
 procedure TFormSeach.btnUpdateClick(Sender: TObject);
@@ -102,6 +105,11 @@ begin
     editValue.NumbersOnly := True
   else
     editValue.NumbersOnly := False;
+end;
+
+procedure TFormSeach.CreateUserClick(Sender: TObject);
+begin
+  btnCreate.Click;
 end;
 
 procedure TFormSeach.DBGrid1DblClick(Sender: TObject);
@@ -124,21 +132,21 @@ begin
     btnSelect.Click;
 end;
 
-procedure TFormSeach.DeleteClick(Sender: TObject);
-begin
-  if (DataSource1.DataSet.IsEmpty) then
-    raise Exception.Create('Selecione um registro');
-
-  if (Application.MessageBox(
-      'Conficar a exclusão deste registro?',
-      'Confirmar exclusão',
-      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) <> IDYES
-  ) then
-      Exit;
-
-  DataSource1.DataSet.Delete;
-  Self.SearchData;
-end;
+//procedure TFormSeach.DeleteClick(Sender: TObject);
+//begin
+//  if (DataSource1.DataSet.IsEmpty) then
+//    raise Exception.Create('Selecione um registro');
+//
+//  if (Application.MessageBox(
+//      'Conficar a exclusão deste registro?',
+//      'Confirmar exclusão',
+//      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) <> IDYES
+//  ) then
+//      Exit;
+//
+//  DataSource1.DataSet.Delete;
+//  Self.SearchData;
+//end;
 
 procedure TFormSeach.editValueKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -151,11 +159,26 @@ end;
 
 procedure TFormSeach.editValueKeyPress(Sender: TObject; var Key: Char);
 begin
-  if (Key = #13) and (not DataSource1.DataSet.IsEmpty) then // Se a tecla pressionada for "Enter"
+  if (Key = #13) then // Se a tecla pressionada for "Enter"
   begin
     Key := #0; // Anula o som do "beep"
     btnSearch.Click;
   end;
+end;
+
+procedure TFormSeach.Excluir1Click(Sender: TObject);
+begin
+  if (DataSource1.DataSet.IsEmpty) then
+    raise Exception.Create('Selecione um registro');
+
+  if (Application.MessageBox(
+      'Conficar a exclusão deste registro?',
+      'Confirmar exclusão',
+      MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) <> IDYES
+  ) then
+      Exit;
+
+//  Self.SearchData;
 end;
 
 procedure TFormSeach.FormKeyDown(Sender: TObject; var Key: Word;
@@ -173,7 +196,7 @@ end;
 
 procedure TFormSeach.FormShow(Sender: TObject);
 begin
-  Self.ModalResult := mrCancel;
+  Self.ModalResult := mrNone;
   editValue.SetFocus;
 end;
 
