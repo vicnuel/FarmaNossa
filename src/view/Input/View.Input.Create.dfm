@@ -173,11 +173,12 @@ inherited ViewInputCreate: TViewInputCreate
       NumbersOnly = True
       ParentFont = False
       TabOrder = 7
+      OnChange = editLocalIdChange
       OnKeyDown = editLocalIdKeyDown
     end
     object editLocalName: TEdit
       Left = 399
-      Top = 39
+      Top = 38
       Width = 120
       Height = 24
       CharCase = ecUpperCase

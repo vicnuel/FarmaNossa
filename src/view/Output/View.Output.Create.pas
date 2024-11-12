@@ -69,6 +69,9 @@ IdLocal, statusRes: Integer;
 Lot: String;
 SOutput: TServiceOutput;
 begin
+  if loading then
+    exit;
+
   if idProd <= 0 then
     raise Exception.Create('Selecione um produto');
 
@@ -83,6 +86,9 @@ begin
   if ((not N_Stock) and ( Quant > QuantSelect)) then
     raise Exception.Create('Produto não aceita estoque negativo, escolha outro lot e local ou altere a quantidade');
 
+  loading := true;
+  Screen.Cursor := crHourGlass;
+  btnCreate.Enabled := false;
 
   IdLocal := DataSource1.DataSet.FieldByName('Cod. local').AsInteger;
 
@@ -113,6 +119,9 @@ begin
     end;
   finally
     SOutput.Free;
+    loading := false;
+    Screen.Cursor := crDefault;
+    btnCreate.Enabled := True;
   end;
 
 end;

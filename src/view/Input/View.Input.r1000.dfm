@@ -5,9 +5,6 @@ inherited ViewInputSearch: TViewInputSearch
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnBottom: TPanel
-    inherited btnCreate: TBitBtn
-      OnClick = btnCreateClick
-    end
     inherited btnSelect: TBitBtn
       Enabled = False
     end
@@ -20,6 +17,11 @@ inherited ViewInputSearch: TViewInputSearch
       inherited lbTotal: TLabel
         Height = 23
       end
+    end
+  end
+  inherited PopupMenu1: TPopupMenu
+    inherited CreateUser: TMenuItem
+      OnClick = CreateUserClick
     end
   end
 end

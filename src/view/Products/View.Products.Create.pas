@@ -45,6 +45,9 @@ Status, NStock, SInput, SOutput: Boolean;
 CodeResult: Integer;
 SProduct: TServiceProduct;
 begin
+  if loading then
+    exit;
+
   Desc := Trim(editDesc.Text);
   if Desc.IsEmpty then
     begin
@@ -52,6 +55,9 @@ begin
       raise Exception.Create('Preecha o campo Descrição');
     end;
 
+  loading := true;
+  Screen.Cursor := crHourGlass;
+  btnCreate.Enabled := false;
   if cbStatus.Text = 'ATIVO' then
     Status := true
   else
@@ -110,6 +116,9 @@ begin
       end;
   finally
     SProduct.Free;
+    loading := false;
+    Screen.Cursor := crDefault;
+    btnCreate.Enabled := True;
   end;
 
 end;

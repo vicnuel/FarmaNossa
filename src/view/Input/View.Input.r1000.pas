@@ -16,6 +16,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnCreateClick(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
+    procedure CreateUserClick(Sender: TObject);
   private
     procedure LoadData;
   protected
@@ -63,6 +64,12 @@ begin
     FViewInputCreate.Free;
   end;
 
+end;
+
+procedure TViewInputSearch.CreateUserClick(Sender: TObject);
+begin
+  inherited;
+  btnCreate.Click;
 end;
 
 procedure TViewInputSearch.FormCreate(Sender: TObject);

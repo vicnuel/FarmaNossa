@@ -39,12 +39,20 @@ Status: Boolean;
 CodeResult: Integer;
 SLocal: TServiceLocal;
 begin
+  if loading then
+    exit;
+
   Desc := Trim(editDesc.Text);
   if Desc.IsEmpty then
     begin
       editDesc.SetFocus;
       raise Exception.Create('Preecha o campo Descrição');
     end;
+
+
+  loading := true;
+  Screen.Cursor := crHourGlass;
+  btnCreate.Enabled := false;
 
   if cbStatus.Text = 'ATIVO' then
     Status := true
@@ -83,6 +91,9 @@ begin
       end;
   finally
     SLocal.Free;
+    loading := false;
+    Screen.Cursor := crDefault;
+    btnCreate.Enabled := True;
   end;
 
 end;

@@ -168,11 +168,21 @@ end;
 
 procedure TViewModelSearchEntry.dtFromChange(Sender: TObject);
 begin
+  if (dtTo.Format = 'dd/MM/yyyy') and (dtTo.Date < dtFrom.Date) then
+  begin
+    dtTo.Format := ' ';
+    raise Exception.Create('Data de fim menor que de inicio');
+  end;
   dtFrom.Format := 'dd/MM/yyyy';
 end;
 
 procedure TViewModelSearchEntry.dtToChange(Sender: TObject);
 begin
+  if (dtFrom.Format = 'dd/MM/yyyy') and (dtTo.Date < dtFrom.Date) then
+  begin
+    dtTo.Format := ' ';
+    raise Exception.Create('Data de fim menor que de inicio');
+  end;
   dtTo.Format := 'dd/MM/yyyy';
 end;
 

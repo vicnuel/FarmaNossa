@@ -11,9 +11,8 @@ inherited ViewLocalCreate: TViewLocalCreate
   inherited pnData: TPanel
     Width = 433
     Height = 171
-    ExplicitTop = -2
-    ExplicitWidth = 420
-    ExplicitHeight = 185
+    ExplicitWidth = 433
+    ExplicitHeight = 171
     object Label2: TLabel
       Left = 298
       Top = 77
@@ -112,11 +111,15 @@ inherited ViewLocalCreate: TViewLocalCreate
   inherited npFooter: TPanel
     Top = 171
     Width = 433
+    ExplicitTop = 171
+    ExplicitWidth = 433
     inherited btnCancel: TBitBtn
       Left = 309
+      ExplicitLeft = 309
     end
     inherited btnCreate: TBitBtn
       Left = 183
+      ExplicitLeft = 183
     end
   end
 end

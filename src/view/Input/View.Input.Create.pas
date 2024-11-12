@@ -53,6 +53,7 @@ type
     procedure btnCreateClick(Sender: TObject);
     procedure editQuantKeyPress(Sender: TObject; var Key: Char);
     procedure FormActivate(Sender: TObject);
+    procedure editLocalIdChange(Sender: TObject);
   private
     FidLocal: Integer;
     FidProd: Integer;
@@ -91,6 +92,8 @@ var
   status: Integer;
   SInput: TServiceInput;
 begin
+  if loading then
+    exit;
   if (Trim(editLot.Text) <> '') then
     SearchLot(Trim(editLot.Text));
 
@@ -129,6 +132,12 @@ begin
     exit;
   end;
 
+  if (dtExp.Format <> 'dd/MM/yyyy') and (dtExp.Date < dtFab.Date) then
+  begin
+    dtExp.Format := ' ';
+    raise Exception.Create('Data de vencimento menor que de fabricação');
+  end;
+
   if Trim(editQuant.Text) = '' then
   begin
     ShowMessage('Informe a quantidade');
@@ -142,6 +151,10 @@ begin
     editQuant.SetFocus;
     exit;
   end;
+
+  loading := True;
+  Screen.Cursor := crHourGlass;
+  btnCreate.Enabled := false;
 
   SInput := TServiceInput.Create;
   try
@@ -173,6 +186,9 @@ begin
 
   finally
     SInput.Free;
+    loading := false;
+    Screen.Cursor := crDefault;
+    btnCreate.Enabled := True;
   end;
 
   // inherited;
@@ -219,6 +235,12 @@ procedure TViewInputCreate.dtExpChange(Sender: TObject);
 begin
   inherited;
   dtExp.Format := 'dd/MM/yyyy';
+  if (dtFab.Format = 'dd/MM/yyyy') and (dtExp.Date < dtFab.Date) then
+  begin
+    dtExp.Format := ' ';
+    raise Exception.Create('Data de vencimento menor que de fabricação');
+  end;
+
   if (Trim(editLot.Text) <> '') then
     SearchLot(Trim(editLot.Text));
 end;
@@ -227,8 +249,29 @@ procedure TViewInputCreate.dtFabChange(Sender: TObject);
 begin
   inherited;
   dtFab.Format := 'dd/MM/yyyy';
+  if (dtExp.Format = 'dd/MM/yyyy') and (dtExp.Date < dtFab.Date) then
+  begin
+    dtExp.Format := ' ';
+    raise Exception.Create('Data de vencimento menor que de fabricação');
+  end;
   if (Trim(editLot.Text) <> '') then
     SearchLot(Trim(editLot.Text));
+end;
+
+procedure TViewInputCreate.editLocalIdChange(Sender: TObject);
+begin
+  inherited;
+  if (Trim(editLocalId.Text) = '') then
+  begin
+    idLocal := 0;
+    editLocalName.Text := '';
+    exit;
+  end;
+  if (Trim(editLocalId.Text).ToInteger() <> idLocal) then
+  begin
+    idLocal := 0;
+    editLocalName.Text := '';
+  end;
 end;
 
 procedure TViewInputCreate.editLocalIdKeyDown(Sender: TObject; var Key: Word;
@@ -455,12 +498,12 @@ begin
       dtFab.Date := StrToDate(DateFab);
       dtExp.Date := StrToDate(DateExp);
 
-      editLot.Enabled := False;
+      editLot.Enabled := false;
       dtFab.Format := 'dd/MM/yyyy';
       dtExp.Format := 'dd/MM/yyyy';
 
-      dtFab.Enabled := False;
-      dtExp.Enabled := False;
+      dtFab.Enabled := false;
+      dtExp.Enabled := false;
 
       editQuant.SetFocus;
 

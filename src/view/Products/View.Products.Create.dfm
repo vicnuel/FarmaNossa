@@ -11,8 +11,6 @@ inherited ViewCreateProduct: TViewCreateProduct
   inherited pnData: TPanel
     Width = 523
     Height = 276
-    ExplicitLeft = -48
-    ExplicitTop = -6
     ExplicitWidth = 523
     ExplicitHeight = 276
     object Label1: TLabel

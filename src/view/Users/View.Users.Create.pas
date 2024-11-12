@@ -42,6 +42,8 @@ var
   User: TServiceUser;
   StatusResult: Integer;
 begin
+  if loading then
+      exit;
   Name := Trim(editName.Text);
   Login := Trim(editLogin.Text);
   Password := Trim(editPass.Text);
@@ -63,6 +65,10 @@ begin
     editPass.SetFocus;
     raise Exception.Create('Preecha o campo Senha de Acesso');
   end;
+
+  loading := true;
+  Screen.Cursor := crHourGlass;
+  btnCreate.Enabled := false;
 
   User := TServiceUser.Create;
   try
@@ -102,6 +108,9 @@ begin
 
   finally
        User.Free;
+       loading := false;
+    Screen.Cursor := crDefault;
+    btnCreate.Enabled := True;
   end;
 
 end;
