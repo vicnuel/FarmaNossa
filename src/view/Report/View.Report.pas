@@ -54,7 +54,53 @@ implementation
 procedure TViewReport.btnExportClick(Sender: TObject);
 begin
   inherited;
-  ExportReportToPDF('relatorio.pdf');
+  // ExportReportToPDF('relatorio.pdf');
+
+  // Reinicializar componentes do relatório
+  frxReport1.Clear;
+  frxReport1.EngineOptions.DestroyForms := true;
+  // Garante que formulários internos sejam destruídos
+  frxDBDataset1.Clear;
+  frxDBDataset2.Clear;
+  frxDBDataset3.Clear;
+  frxDBDataset4.Clear;
+
+  frxReport1.Clear;
+  case cbReport.ItemIndex of
+    0:
+      begin
+        frxDBDataset1.DataSet := memTable;
+        frxReport1.DataSet := frxDBDataset1;
+        frxReport1.LoadFromFile
+          ('C:\Users\victo\OneDrive\Documentos\GitHub\Delphi\FarmaNossa\FR3\MODELO01.fr3');
+      end;
+    1:
+      begin
+        frxDBDataset2.DataSet := memTable;
+        frxReport1.DataSet := frxDBDataset2;
+        frxReport1.LoadFromFile
+          ('C:\Users\victo\OneDrive\Documentos\GitHub\Delphi\FarmaNossa\FR3\MODELO02.fr3');
+      end;
+    2:
+      begin
+        frxDBDataset3.DataSet := memTable;
+        frxReport1.DataSet := frxDBDataset3;
+        frxReport1.LoadFromFile
+          ('C:\Users\victo\OneDrive\Documentos\GitHub\Delphi\FarmaNossa\FR3\MODELO03.fr3');
+      end;
+    3:
+      begin
+        frxDBDataset4.DataSet := memTable;
+        frxReport1.DataSet := frxDBDataset4;
+        frxReport1.LoadFromFile
+          ('C:\Users\victo\OneDrive\Documentos\GitHub\Delphi\FarmaNossa\FR3\MODELO04.fr3');
+      end;
+  end;
+  // (frxReport1.FindComponent('m_data') as TfrxMemoView).Text   := '12/11/2024';
+
+  frxReport1.PreviewOptions.AllowEdit := False;
+  frxReport1.ShowReport;
+
 end;
 
 procedure TViewReport.cbReportChange(Sender: TObject);
@@ -80,11 +126,11 @@ procedure TViewReport.loadColumns;
 begin
   if cbReport.ItemIndex = 1 then
   begin
-    editLocalId.Visible := false;
-    editLocalName.Visible := false;
-    btnSearchLocal.Visible := false;
-    lbLocal.Visible := false;
-    lbLocal2.Visible := false;
+    editLocalId.Visible := False;
+    editLocalName.Visible := False;
+    btnSearchLocal.Visible := False;
+    lbLocal.Visible := False;
+    lbLocal2.Visible := False;
   end
   else
   begin
@@ -200,16 +246,16 @@ begin
     Memo := TfrxMemoView.Create(TitleBand);
     Memo.CreateUniqueName;
 
-     case cbReport.ItemIndex of
-        0:
-          Memo.Text := 'Relatório: ' + 'Ficha de estoque';
-        1:
-          Memo.Text := 'Relatório: ' + 'Relação de produtos';
-        2:
-          Memo.Text := 'Relatório: ' + 'Relação de produtos por lote';
-        3:
-          Memo.Text := 'Relatório: ' + 'Produtos em estoque por Local';
-      end;
+    case cbReport.ItemIndex of
+      0:
+        Memo.Text := 'Relatório: ' + 'Ficha de estoque';
+      1:
+        Memo.Text := 'Relatório: ' + 'Relação de produtos';
+      2:
+        Memo.Text := 'Relatório: ' + 'Relação de produtos por lote';
+      3:
+        Memo.Text := 'Relatório: ' + 'Produtos em estoque por Local';
+    end;
     Memo.Width := Page.Width;
     Memo.Height := 50;
     Memo.HAlign := haCenter;
