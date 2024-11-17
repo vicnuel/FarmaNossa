@@ -15,6 +15,4 @@
 - Backend: https://github.com/vicnuel/FNBackend 
 
 ## Tutorial
-<html>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UTpRe_sInR8?si=uLLOx0qLMsXFmUP1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</html>
+[Assista ao tutorial no YouTube](https://www.youtube.com/watch?v=UTpRe_sInR8?si=uLLOx0qLMsXFmUP1)
