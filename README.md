@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/vicnuel/FarmaNossa/refs/heads/main/Image/Logo.png?token=GHSAT0AAAAAAC2TFMFDBVV73P4N6IH76HFUZZZ76FA" />
+
 # Farma Nossa - Gerenciador de estoque de Farmacias
 - Cadastro de usuários
 - cadastro de produtos
@@ -16,3 +18,7 @@
 
 ## Tutorial
 [Assista ao tutorial no YouTube](https://www.youtube.com/watch?v=UTpRe_sInR8?si=uLLOx0qLMsXFmUP1)
+
+---
+
+<img src="https://raw.githubusercontent.com/vicnuel/FarmaNossa/refs/heads/main/Image/back.png?token=GHSAT0AAAAAAC2TFMFDNO2KXICAWU27K5SKZZZ76OQ"/>
