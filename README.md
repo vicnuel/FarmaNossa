@@ -21,4 +21,4 @@
 
 ---
 
-<img src="https://raw.githubusercontent.com/vicnuel/FarmaNossa/refs/heads/main/Image/back.png?token=GHSAT0AAAAAAC2TFMFDNO2KXICAWU27K5SKZZZ76OQ"/>
+<img src="https://raw.githubusercontent.com/vicnuel/FarmaNossa/refs/heads/main/Image/back.png"/>
