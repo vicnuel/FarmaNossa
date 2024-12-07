@@ -14,7 +14,7 @@
 - Delphi 10.4
 - FastReaport v6.9.3 enterprise
 - TIdHttp
-- Backend: https://github.com/vicnuel/FNBackend 
+- Backend: https://github.com/vicnuels/FNBackend 
 
 ## Tutorial
 [Assista ao tutorial no YouTube](https://www.youtube.com/watch?v=UTpRe_sInR8?si=uLLOx0qLMsXFmUP1)
